@@ -10,9 +10,9 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 
 /**
- * 消息解码器
+ * Message decoder
  * @author allen
- * 2018年8月7日
+ * August 7, 2018
  */
 public class MsgDecoder extends ByteToMessageDecoder{
 
@@ -42,7 +42,7 @@ public class MsgDecoder extends ByteToMessageDecoder{
 		msgVo.setData(body);
 		msgVo.setTail(tail);
 		out.add(msgVo);
-		//释放资源
+		//Releasing resources
 		hbuf.release();
 		bodybuf.release();
 		tbuf.release();

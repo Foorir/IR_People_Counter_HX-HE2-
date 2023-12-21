@@ -9,42 +9,42 @@ package com.example.demo.tcp5g.msg;
 public class MsgVo5g {
 
     /**
-     * 起始字节1个字节
+     * The starting byte is 1 byte
      */
     private byte head = (byte) 0x7E;
     /**
-     * 设备sn4个字节
+     * Device sn4 bytes
      */
     private byte[] sn = new byte[] { (byte) 0xFF, (byte) 0xFF, (byte) 0xFF, (byte) 0xFF };
     /**
-     * 消息指令类型 1个字节
+     * The message instruction type is 1 byte
      */
     private byte type;
     /**
-     * 参数部分 1个字节
+     * The parameter section is 1 byte
      */
     private byte params;
     /**
-     * 包体 数据长度 2个字节
+     * The length of the packet body data is 2 bytes
      */
     private int len;
     /**
-     * 包体 包数据
+     * The package body contains the data
      */
     private String data;
 
     /**
-     * crc数据校验低
+     * crc data validation is low
      */
     private byte    crcLow;
 
     /**
-     * crc数据校验 高
+     * crc data check height
      */
     private byte    crcHigh;
 
     /**
-     * 帧尾
+     * End of frame
      */
     private Byte   tail= (byte) 0x7D;
 

@@ -49,18 +49,18 @@ public class NettyTcpServer5g implements Runnable {
 
 
     /**
-     * 通道适配器
+     * Channel adapter
      */
     @Resource
     private ServerChannelHandlerAdapter5g channelHandlerAdapter;
 
     public synchronized void startListen() {
         try {
-            // 绑定到指定端口
+            // Bind to the specified port
             channelFuture = server.bind(port).sync();
-            log.info("红外客流5G服务器在[{}]端口启动监听", port);
+            log.info("Infrared passenger flow 5G server in[{}]Port start listening", port);
         } catch (Exception e) {
-            log.error("红外客流5G服务器在[{}]端口启动监听失败", port);
+            log.error("Infrared passenger flow 5G server in[{}]Failed to start listening on the port", port);
             e.printStackTrace();
         }
     }
@@ -76,10 +76,10 @@ public class NettyTcpServer5g implements Runnable {
         }
 
         try {
-            log.info("向客户端 {} 发送消息内容：{}", clientIp, sendStr);
+            log.info("To the client {} Sending message contents：{}", clientIp, sendStr);
             channel.writeAndFlush(sendStr);
         } catch (Exception var4) {
-            log.error("向客户端 {} 发送消息失败，消息内容：{}", clientIp, sendStr);
+            log.error("To the client {} Failed to send message, message content：{}", clientIp, sendStr);
             throw new RuntimeException(var4);
         }
     }
@@ -87,9 +87,9 @@ public class NettyTcpServer5g implements Runnable {
 
     @Override
     public void run() {
-        // nio连接处理池
+        // The nio connects to the processor pool
         this.bossGroup = new NioEventLoopGroup();
-        // 处理事件池
+        // Handling event pools
         this.workerGroup = new NioEventLoopGroup();
         server = new ServerBootstrap();
         server.group(bossGroup, workerGroup)
@@ -97,7 +97,7 @@ public class NettyTcpServer5g implements Runnable {
                 .childHandler(new ChannelInitializer<SocketChannel>() {
                     @Override
                     protected void initChannel(SocketChannel ch) throws Exception {
-                        // 自定义处理类
+                        // Custom processing classes
                         ch.pipeline().addLast("frameDecoder", new LengthFieldBasedFrameDecoder(905969674,7,2,3,0));
                         ch.pipeline().addLast(new NettyDecoder5g());
 //                        ch.pipeline().addLast(new TcpServerHandler1());

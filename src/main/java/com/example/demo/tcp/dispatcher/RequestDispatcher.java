@@ -20,30 +20,30 @@ public class RequestDispatcher {
 	static Logger DATA_LOGGER = LoggerFactory.getLogger("UPDATE_DATA");
 
 	/**
-	 * 消息流转处理,将消息进行分类处理
+	 * Message flow processing, classifying messages
 	 *
 	 * @param channelHandlerContext
 	 * @param
 	 */
 	public static void dispatcher(ChannelHandlerContext channelHandlerContext, MsgVo msg) {
-//		获取消息的类型,16进制22为时间同步,21为数据上报
+//		Get the type of the message, with hexadecimal 22 for time synchronization and 21 for data reporting
 		byte code = msg.getType();
-//		通过上面获得的code找出对应的类型
+//		Use the code obtained above to find the type
 		String command = CmdType.getDescsByCode(code);
 		logger.info("{} - {} ===========>{}",String.format("%02x ", code), command, JSON.toJSONString(msg));
-//		通过获取的code来进行后续业务处理的方法的选择
+//		Selection of methods for subsequent business processing through the acquired code
 		BaseHandler baseHandler = (BaseHandler) requestHandlerMap.get(code);
 		MsgVo responseMsg = baseHandler.handle(msg, channelHandlerContext);
 		logger.info("{} - {} ===========>{}", String.format("%02x ", code), "数据响应", JSON.toJSONString(responseMsg));
 		if (responseMsg != null) {
-//			如果有返回信息,将返回信息进行输出
+//			If any, the information is returned for output
 			channelHandlerContext.writeAndFlush(responseMsg);
 		}
 
 	}
 
 	/**
-	 * 启动项目时,将code和对应的处理类存入
+	 * When you start the project, store the code and the corresponding handler classes
 	 * @param courseMap
 	 */
 	public static void setRequestHandlerMap(Map<Byte, BaseHandler> courseMap) {

@@ -9,9 +9,9 @@ import java.lang.reflect.Field;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
- * 检测堆外内存
+ * Detect off-heap memory
  * @author allen
- * 2019年1月2日
+ * January 2, 2019
  */
 public class DirectMemoryThead implements Runnable{
 	
@@ -26,9 +26,9 @@ public class DirectMemoryThead implements Runnable{
 			try{
 				AtomicLong directMemory = (AtomicLong)field.get(PlatformDependent.class);
 				int memoryInkb = (int)(directMemory.get()/1024);
-				logger.info("已使用堆外内存："+memoryInkb);
+				logger.info("Off-heap memory is used："+memoryInkb);
 			}catch(Exception e){
-				logger.info("堆外内存获取异常");
+				logger.info("Off-heap memory acquisition exception");
 			}
 			try {
 				Thread.sleep(5000);

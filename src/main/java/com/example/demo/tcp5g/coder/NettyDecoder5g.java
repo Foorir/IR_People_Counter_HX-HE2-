@@ -52,7 +52,7 @@ public class NettyDecoder5g extends ByteToMessageDecoder {
         System.err.println("--------type----------");
         System.err.println(len);
         out.add(msgVo);
-        //释放资源
+        //Releasing resources
         sbuf.release();
         bodybuf.release();
     }
@@ -60,7 +60,7 @@ public class NettyDecoder5g extends ByteToMessageDecoder {
 
 
     /**
-     * 数组转换成十六进制字符串
+     * Array to hexadecimal string
      *
      * @param bArray
      * @return HexString

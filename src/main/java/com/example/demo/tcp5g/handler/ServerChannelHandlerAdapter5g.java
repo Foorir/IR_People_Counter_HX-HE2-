@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * @author TRH
- * @description: 客户端通道管理
+ * @description: Client channel management
  * @Package com.example.testdemo.tcpkeliu1.handler
  * @date 2023/3/23 17:51
  */
@@ -37,13 +37,13 @@ public class ServerChannelHandlerAdapter5g extends ChannelInboundHandlerAdapter 
         String deviceId = NettyChannelMap5g.get(channel);
         if (deviceId != null) {
             NettyChannelMap5g.removeClient(deviceId);
-            logger.warn("{} 下线", deviceId);
+            logger.warn("{} Go offline", deviceId);
         }
         super.channelInactive(ctx);
         try {
             ctx.channel().close();
         } catch (Exception e) {
-            logger.error("channelInactive异常", e);
+            logger.error("channelInactive exception", e);
         }
 
     }

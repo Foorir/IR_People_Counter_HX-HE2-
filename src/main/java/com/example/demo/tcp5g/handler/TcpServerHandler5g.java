@@ -21,24 +21,24 @@ import java.util.concurrent.ConcurrentSkipListMap;
 @Slf4j
 public class TcpServerHandler5g extends SimpleChannelInboundHandler<Object> {
     /**
-     * 用跳表存储连接channel
+     * Use skip lists to store connection channels
      */
     public static Map<Integer, Map<String, Channel>> channelSkipMap = new ConcurrentSkipListMap<>();
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-        log.error("应用程序的监听通道异常!");
+        log.error("Application's listening channel exception!");
         cause.printStackTrace();
     }
 
     @Override
     public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
         Channel channel = ctx.channel();
-        // 获取每个用户端连接的ip
+        // Get the ip of each client connection
         InetSocketAddress ipSocket = (InetSocketAddress) channel.remoteAddress();
         String clientIp = ipSocket.getAddress().getHostAddress();
         InetSocketAddress localSocket = (InetSocketAddress) channel.localAddress();
-        // 本地端口做键
+        // The local port is the key
         int localPort = localSocket.getPort();
         Map<String, Channel> channelMap = channelSkipMap.get(localPort);
         if (CollectionUtils.isEmpty(channelMap)) {
@@ -46,12 +46,12 @@ public class TcpServerHandler5g extends SimpleChannelInboundHandler<Object> {
         }
         channelMap.put(clientIp, channel);
         channelSkipMap.put(localPort, channelMap);
-        log.info("应用程序添加监听通道，与客户端：{} 建立连接成功！", clientIp);
+        log.info("The application adds a listening channel with the client：{} Connection established successfully！", clientIp);
     }
 
     @Override
     public void handlerRemoved(ChannelHandlerContext ctx) throws Exception {
-        // 获取每个用户端连接的ip
+        // Get the ip of each client connection
         Channel channel = ctx.channel();
         InetSocketAddress localSocket = (InetSocketAddress) channel.localAddress();
         int localPort = localSocket.getPort();
@@ -59,14 +59,14 @@ public class TcpServerHandler5g extends SimpleChannelInboundHandler<Object> {
         String clientIp = ipSocket.getAddress().getHostAddress();
         Map<String, Channel> channelMap = channelSkipMap.get(localPort);
         channelMap.remove(clientIp);
-        log.info("应用程序移除监听通道，与客户端：{} 断开连接！", clientIp);
+        log.info("The application removes the listening channel with the client：{} Disconnect！", clientIp);
     }
 
     @Override
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, Object msg) throws Exception {
         MsgVo5g msgVo = (MsgVo5g) msg;
         System.err.println(msgVo);
-        log.info("接收到应用数据：{}", msgVo.getData());
+        log.info("Application data received：{}", msgVo.getData());
     }
 
 }

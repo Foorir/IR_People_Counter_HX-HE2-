@@ -3,7 +3,7 @@ package com.example.demo.tcp.constant;
 public class Constants {
 
 	/**
-	 * channelUid - 控制盒sn
+	 * channelUid - Control boxsn
 	 */
 	//public static Map<String,String> uuidCboxSnMap = new ConcurrentHashMap<String, String>();
 	

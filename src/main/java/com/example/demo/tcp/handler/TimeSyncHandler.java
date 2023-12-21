@@ -23,32 +23,32 @@ public class TimeSyncHandler<T> implements BaseHandler {
 
 
     /**
-     * 时间同步的处理方法
+     * How to handle time synchronization
      * @param msgVo
      * @param ctx
      * @return
      */
     @Override
     public MsgVo handle(MsgVo msgVo, ChannelHandlerContext ctx) {
-//        将相应的xml形式的数据文件转为标准的json数据
+//        The corresponding xml data files are converted to standard json data
         JSONObject jsonObject = XmlTool.documentToJSONObject(msgVo.getData());
-//        获取唯一值
+//        Getting a unique value
         String uuid = jsonObject.getString("uuid");
 
-        logger.info("时间同步上报：" + jsonObject);
+        logger.info("Time synchronization reporting：" + jsonObject);
 
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
 
         MsgVo vvv = response(uuid, 0, msgVo, sdf.format(new Date()), "", "", "","");
 
-        logger.info("时间同步回复：" + XmlTool.documentToJSONObject(vvv.getData()));
+        logger.info("Time synchronization reply：" + XmlTool.documentToJSONObject(vvv.getData()));
 
         return vvv;
     }
 
     /**
-     * 该方法将指定数据进行格式化处理
+     * This method formats the specified data
      * @param deviceId
      * @param ret
      * @param msgVo
@@ -59,7 +59,7 @@ public class TimeSyncHandler<T> implements BaseHandler {
      * @return
      */
     public MsgVo response(String deviceId, int ret, MsgVo msgVo, String time, String uploadInterval, String dataStartTime, String dataEndTime,String timeZone) {
-//        传入设备id,ret的成功值为0,失败为1,信息对象,当前时间,上传间隔,开始时间与结束时间,进行格式化处理
+//        Pass in the device id,ret success value of 0, failure value of 1, information object, current time, upload interval, start time and end time, and format
         MsgVo responseMsg = new MsgVo();
         responseMsg.setSeq(msgVo.getSeq());
         responseMsg.setType(msgVo.getType());

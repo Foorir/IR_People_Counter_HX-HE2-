@@ -11,7 +11,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author TRH
- * @description: 消息分发
+ * @description: Message distribution
  * @Package com.example.demo.tcp5g.dispatcher
  * @date 2023/3/27 16:19
  */
@@ -21,29 +21,29 @@ public class RequestDispatcher5g {
 
 
     public  static void dispatcher(ChannelHandlerContext channelHandlerContext, MsgVo5g msgVo5g){
-//        获取消息处理器类型
+//        Gets the message handler type
         byte code = msgVo5g.getType();
-//        找出对应注解
+//        Find the corresponding annotation
         String command = CmdType.getDescsByCode(code);
         log.info("{} - {} ===========>{}",String.format("%02x ", code), command, JSON.toJSONString(msgVo5g));
 
-//		通过获取的code来进行后续业务处理的方法的选择
+//		Selection of methods for subsequent business processing through the acquired code
         BaseHandler5g baseHandler = (BaseHandler5g) requestHandlerMap.get(code);
         if (baseHandler == null){
             String sTemp = Integer.toHexString(0xFF & code);
-            log.info("指令不存在: ======>{}",sTemp);
+            log.info("Instruction does not exist: ======>{}",sTemp);
             return;
         }
         MsgVo5g responseMsg = baseHandler.handle(msgVo5g, channelHandlerContext);
-        log.info("{} - {} ===========>{}", String.format("%02x ", code), "数据响应", JSON.toJSONString(responseMsg));
+        log.info("{} - {} ===========>{}", String.format("%02x ", code), "Data response", JSON.toJSONString(responseMsg));
         if (responseMsg != null) {
-//			如果有返回信息,将返回信息进行输出
+//			If any, the information is returned for output
             channelHandlerContext.writeAndFlush(responseMsg);
         }
     }
 
     /**
-     * 启动项目时,将code和对应的处理类存入
+     * When you start the project, store the code and the corresponding handler classes
      * @param courseMap
      */
     public static void setRequestHandlerMap(Map<Byte, BaseHandler5g> courseMap) {

@@ -5,9 +5,9 @@ import com.example.demo.tcp.constant.MsgVo;
 import io.netty.channel.ChannelHandlerContext;
 
 /**
- * 协议处理基类
+ * Protocols deal with base classes
  * @author allen
- * 2018年8月13日
+ * August 13, 2018
  */
 public interface BaseHandler {
 	

@@ -20,7 +20,7 @@ import java.util.Date;
 
 /**
  * @author TRH
- * @description: 心跳
+ * @description: heartbeat
  * @Package com.example.testdemo.tcpkeliu1.handler
  * @date 2023/3/23 17:19
  */
@@ -35,14 +35,14 @@ public class HeartHandler<T>  implements BaseHandler5g {
         log.info("Received heartbeat：{}", msgVo.getData());
         String data = msgVo.getData();
         String[] split = data.split(",");
-//      设备当前时间
+//      Current time of the device
         LocalDateTime now = LocalDateTime.now();
         String time = DateTimeFormatter.ofPattern("yyyyMMddHHmmss").format(now);
-//      开始时间
+//      Start time
         String startTime = "0800";
-//      结束时间
+//      End time
         String endTime = "2000";
-//      间隔
+//      interval
         Integer interval = 1;
         String sn = split[0];
 
@@ -56,7 +56,7 @@ public class HeartHandler<T>  implements BaseHandler5g {
         String verDir = "/opt/upgradeSns";
         File allUpgrade = new File(verDir + File.separator + "000000");
         if(allUpgrade.exists()){
-            //log.info("000000升级!");
+            //log.info("000000Upgrade!");
             if(!Constants.upSns.contains(sn)){
                 String url = readUpgradeUrl(allUpgrade);
                 isLevelUp = 1;
@@ -113,37 +113,37 @@ public class HeartHandler<T>  implements BaseHandler5g {
                 log.info("Response heartbeat：{}", jsonObject);
 
                 StringBuilder data = new StringBuilder();
-                //状态码
+                //Status code
                 data.append(jsonObject.getString("code"));
                 data.append(",");
-                //时间
+                //Time
                 data.append(jsonObject.getString("time"));
                 data.append(",");
-                //开始时间
+                //Start time
                 data.append(jsonObject.getString("startTime"));
                 data.append(",");
-                //结束时间
+                //End time
                 data.append(jsonObject.getString("endTime"));
                 data.append(",");
-                //上传间隔
+                //Upload interval
                 data.append(jsonObject.getString("interval"));
                 data.append(",");
-                //探测速度 高中低模式
+                //Detection speed high medium low mode
                 data.append(jsonObject.getString("velocity"));
                 data.append(",");
-                //检测方向
+                //Direction of detection
                 data.append(jsonObject.getString("direction"));
                 data.append(",");
-                //是否升级
+                //Upgrade or not
                 data.append(jsonObject.getIntValue("update"));
 
                 if(jsonObject.getIntValue("update") == 0){
                     data.append(",0");
                 }else{
-                    //更新的路径
+                    //Updated path
                     data.append(",");
                     data.append(jsonObject.getString("updateUrl"));
-                    //url链接包头长度
+                    //url Link header size
                     data.append(",");
                     data.append(length);
                 }
@@ -167,37 +167,37 @@ public class HeartHandler<T>  implements BaseHandler5g {
         }
 
         StringBuilder data = new StringBuilder();
-//        状态码
+//        Status code
         data.append(code);
         data.append(",");
-//        时间
+//        Time
         data.append(time);
         data.append(",");
-//        开始时间
+//        Start time
         data.append(startTime);
         data.append(",");
-//        结束时间
+//        End time
         data.append(endTime);
         data.append(",");
-//        上传间隔
+//        Upload interval
         data.append(interval);
         data.append(",");
-//        探测速度 高中低模式
+//        Detection speed high medium low mode
         data.append(velocity);
         data.append(",");
-//        检测方向
+//        Direction of detection
         data.append(direction);
         data.append(",");
-//        是否升级
+//        Upgrade or not
         data.append(update);
 
         if(update == 0){
             data.append(",0");
         }else{
-            //更新的路径
+            //Updated path
             data.append(",");
             data.append(updateUrl);
-            //url链接包头长度
+            //url Link header size
             data.append(",");
             data.append(length);
         }

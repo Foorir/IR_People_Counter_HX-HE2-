@@ -24,17 +24,17 @@ public class CRCUtils {
     }
 
     /**
-     * 计算CRC16校验码
+     * Calculate the CRC16 check code
      *
      * @param bytes
-     *            字节数组
-     * @return {@link String} 校验码
+     *            Byte array
+     * @return {@link String} Verification code
      * @since 1.0
      */
     public static String getCRC(byte[] bytes) {
-        // CRC寄存器全为1
+        // The CRC register is all 1
         int CRC = 0x0000ffff;
-        // 多项式校验值
+        // Polynomial check value
         int POLYNOMIAL = 0x0000a001;
         int i, j;
         for (i = 0; i < bytes.length; i++) {
@@ -48,28 +48,28 @@ public class CRCUtils {
                 }
             }
         }
-        // 结果转换为16进制
+        // The result is converted to hexadecimal
         String result = Integer.toHexString(CRC).toUpperCase();
         if (result.length() != 4) {
             StringBuffer sb = new StringBuffer("0000");
             result = sb.replace(4 - result.length(), 4, result).toString();
         }
-        //高位在前地位在后
+        //A high position precedes a low position
         //return result.substring(2, 4) + " " + result.substring(0, 2);
-        // 交换高低位，低位在前高位在后
+        // Swap high and low bits, low bits first and high bits last
         return result.substring(2, 4) + " " + result.substring(0, 2);
     }
 
 
 
     /**
-     * 将int转换成byte数组，低位在前，高位在后
-     * 改变高低位顺序只需调换数组序号
+     * Converts an int to a byte array, putting the least bit first and the most bit last
+     * Changing the high and low bit order is simply a matter of swapping the array number
      */
     public static byte[] getByteCRC(byte[] bytes)  {
-        // CRC寄存器全为1
+        // The CRC register is all 1
         int CRC = 0x0000ffff;
-        // 多项式校验值
+        // Polynomial check value
         int POLYNOMIAL = 0x0000a001;
         int i, j;
         for (i = 0; i < bytes.length; i++) {

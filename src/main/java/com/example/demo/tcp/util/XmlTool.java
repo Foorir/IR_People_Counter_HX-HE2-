@@ -13,14 +13,14 @@ import java.util.List;
 
 public class XmlTool {
 	/**
-     * String 转 org.dom4j.Document
+     * String turn org.dom4j.Document
      * @param xml
      * @return
      * @throws DocumentException
      */
     public static Document strToDocument(String xml){
         try {
-        	//加上xml标签是为了获取最外层的标签，如果不需要可以去掉
+        	//The xml tag is added to get the outermost tag, and you can remove it if you don't need it
 		//	return DocumentHelper.parseText("<xml>"+xml+"</xml>");
 			return DocumentHelper.parseText(xml);
 		} catch (DocumentException e) {
@@ -30,7 +30,7 @@ public class XmlTool {
     }
  
     /**
-     * org.dom4j.Document 转  com.alibaba.fastjson.JSONObject
+     * org.dom4j.Document turn  com.alibaba.fastjson.JSONObject
      * @param xml
      * @return
      * @throws DocumentException
@@ -40,27 +40,27 @@ public class XmlTool {
     }
  
     /**
-     * org.dom4j.Element 转  com.alibaba.fastjson.JSONObject
+     * org.dom4j.Element turn  com.alibaba.fastjson.JSONObject
      * @param node
      * @return
      */
     public static JSONObject elementToJSONObject(Element node) {
         JSONObject result = new JSONObject();
-        // 当前节点的名称、文本内容和属性
-        List<Attribute> listAttr = node.attributes();// 当前节点的所有属性的list
-        for (Attribute attr : listAttr) {// 遍历当前节点的所有属性
+        // The name, text content, and attributes of the current node
+        List<Attribute> listAttr = node.attributes();// A list of all the attributes of the current node
+        for (Attribute attr : listAttr) {// Iterate over all properties of the current node
             result.put(attr.getName(), attr.getValue());
         }
-        // 递归遍历当前节点所有的子节点
-        List<Element> listElement = node.elements();// 所有一级子节点的list
+        // Recursively iterate over all the children of the current node
+        List<Element> listElement = node.elements();// A list of all level-1 children
         if (!listElement.isEmpty()) {
-            for (Element e : listElement) {// 遍历所有一级子节点
-                if (e.attributes().isEmpty() && e.elements().isEmpty()) // 判断一级节点是否有属性和子节点
-                    result.put(e.getName(), e.getTextTrim());// 沒有则将当前节点作为上级节点的属性对待
+            for (Element e : listElement) {// Iterate over all level-1 child nodes
+                if (e.attributes().isEmpty() && e.elements().isEmpty()) // Determine whether a level-1 node has attributes and children
+                    result.put(e.getName(), e.getTextTrim());// If not, the current node is treated as a property of the parent node
                 else {
-                    if (!result.containsKey(e.getName())) // 判断父节点是否存在该一级节点名称的属性
-                        result.put(e.getName(), new JSONArray());// 没有则创建
-                    ((JSONArray) result.get(e.getName())).add(elementToJSONObject(e));// 将该一级节点放入该节点名称的属性对应的值中
+                    if (!result.containsKey(e.getName())) // Attribute that determines whether the parent node has the name of the level 1 node
+                        result.put(e.getName(), new JSONArray());// If not, create
+                    ((JSONArray) result.get(e.getName())).add(elementToJSONObject(e));// Put the level-1 node into the value corresponding to the attribute of the node name
                 }
             }
         }

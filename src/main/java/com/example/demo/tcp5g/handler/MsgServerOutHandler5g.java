@@ -10,7 +10,7 @@ import java.net.SocketAddress;
 
 /**
  * @author TRH
- * @description: 数据发送
+ * @description: Data sending
  * @Package com.example.testdemo.tcpkeliu1.handler
  * @date 2023/3/24 15:07
  */

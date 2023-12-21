@@ -23,7 +23,7 @@ public class ContextRefreshedListener implements ApplicationListener<Application
 	@Override
 	public void onApplicationEvent(ApplicationStartedEvent event) {
 		Map<Byte, BaseHandler> map = new HashMap<>();
-//		获取所有实例的业务场景
+//		Get the business scenario for all instances
 		Map<String, Object> handlerMap = event.getApplicationContext().getBeansWithAnnotation(RequestHandler.class);
 		//logger.info("---------------------load request handler----------------------");
 		for (Map.Entry<String, Object> entry : handlerMap.entrySet()) {
@@ -34,7 +34,7 @@ public class ContextRefreshedListener implements ApplicationListener<Application
 
 			for (Annotation annotation : annotations) {
 				if (annotation.annotationType().equals(RequestHandler.class)) {
-//					将相应的类型和业务处理放入map中
+//					Put the corresponding types and business processes into the map
 					RequestHandler requestHandler = (RequestHandler) annotation;
 					map.put(requestHandler.type().getTypeCode(), object);
 					//logger.info("{}：{}", requestHandler.type().getDescs(),object.getClass().getName());

@@ -10,9 +10,9 @@ import org.slf4j.LoggerFactory;
 
 
 /**
- * 消息编码器
+ * Message encoder
  * @author allen
- * 2018年8月7日
+ * August 7, 2018
  */
 public class MsgEncoder extends MessageToByteEncoder<MsgVo> {
 	
@@ -21,17 +21,17 @@ public class MsgEncoder extends MessageToByteEncoder<MsgVo> {
 	@Override
 	protected void encode(ChannelHandlerContext ctx, MsgVo msg, ByteBuf out)
 			throws Exception {
-		//写入头字节
+		//Write header byte
 		out.writeBytes(new byte[]{(byte) 0xFA,(byte) 0xF5,(byte) 0xF6});
-		//写入流水号
+		//Write the pipeline number
 		out.writeShort(msg.getSeq());
-		//写入消息类型
+		//Writing the message type
 		out.writeByte(msg.getType());
-		//写入包体长度
+		//Write the packet body length
 		out.writeShort(msg.getLen());
-		//写入包数据
+		//Writing packet data
 		out.writeBytes(msg.getData().getBytes());
-		//写入结束字节
+		//End of write byte
 		out.writeBytes(new byte[]{(byte) 0xFA,(byte) 0xF6,(byte) 0xF5});
 		//byte[] bs = ByteObjConverter.ObjectToByte(obj);
 		//out.writeBytes(bs);

@@ -5,27 +5,27 @@ package com.example.demo.tcp.constant;
 public class MsgVo {
 
 	/**
-	 * 起始字节3个字节
+	 * The starting byte is three bytes
 	 */
 	private byte[] head = new byte[] { (byte) 0xFA, (byte) 0xF5, (byte) 0xF6 };
 	/**
-	 * 流水号 2个字节
+	 * The pipeline number is 2 bytes
 	 */
 	private int seq;
 	/**
-	 * 消息类型 1个字节
+	 * The message type is 1 byte
 	 */
 	private byte type;
 	/**
-	 * 包体 数据长度 4个字节
+	 * The length of the packet body data is 4 bytes
 	 */
 	private int len;
 	/**
-	 * 包体 包数据
+	 * The package body contains the data
 	 */
 	private String data;
 	/**
-	 * 结束字节 3 个字节
+	 * The end byte is 3 bytes
 	 */
 	private byte[] tail = new byte[] { (byte) 0xFA, (byte) 0xF6, (byte) 0xF5 };
 

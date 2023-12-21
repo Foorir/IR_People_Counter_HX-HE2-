@@ -7,10 +7,10 @@ package com.example.demo.tcp5g.msg;
  * @date 2023/3/23 16:42
  */
 public enum CmdType5g {
-    HEART_UPLOAD((byte) 0xD1, "心跳上报"),
-    DATA_UPLOAD((byte) 0xD2, "数据上报"),
-    DATA_UPLOAD_HISTORY((byte) 0xD3, "历史数据上报"),
-    LEVEL_UPLOAD((byte) 0xD4,"固件升级"),
+    HEART_UPLOAD((byte) 0xD1, "Reporting of heartbeat"),
+    DATA_UPLOAD((byte) 0xD2, "Data reporting"),
+    DATA_UPLOAD_HISTORY((byte) 0xD3, "Reporting of historical data"),
+    LEVEL_UPLOAD((byte) 0xD4,"Firmware upgrade"),
     ;
 
     private byte typeCode;

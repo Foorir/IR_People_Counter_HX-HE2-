@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.TimeZone;
 
 /**
- * 时区工具类
+ * Time zone utility class
  *
  * @author hyq
  * @date 2020/12/22
@@ -19,7 +19,7 @@ public class TimeZoneUtils {
     public final static String TIME_ZONE = "Asia/Shanghai";
 
     /**
-     * 获取指定时区的当前时间
+     * Retrieves the current time in the specified time zone
      *
      * @param date
      * @param timezone Asia/Shanghai
@@ -36,7 +36,7 @@ public class TimeZoneUtils {
     }
 
     /**
-     * 获取指定时区的当前时间字符串
+     * Gets the current time string for the specified time zone
      *
      * @param date
      * @param timezone Asia/Shanghai
@@ -49,7 +49,7 @@ public class TimeZoneUtils {
     }
 
     /**
-     * 获取指定时区的当前时间字符串
+     * Gets the current time string for the specified time zone
      *
      * @param date
      * @param timezone Asia/Shanghai

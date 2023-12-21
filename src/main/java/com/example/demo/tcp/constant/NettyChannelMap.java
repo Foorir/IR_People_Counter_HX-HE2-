@@ -10,9 +10,9 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * TCP/IP 客户端通道管理类
+ * TCP/IP Client channel management class
  * @author allen
- * 2018年8月9日
+ * August 9, 2018
  */
 public class NettyChannelMap {
 	

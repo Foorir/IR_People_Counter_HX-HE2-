@@ -18,7 +18,7 @@ import java.text.SimpleDateFormat;
 
 
 /**
- * 管道数据读取
+ * Pipeline data reading
  * 
  * @author allen 2018年8月7日
  */
@@ -55,7 +55,7 @@ public class ServerChannelHandlerAdapter extends ChannelInboundHandlerAdapter {
 	}
 
 	/**
-	 * 此方法是16进制报文解码完成后所执行的步骤
+	 * This method is the step performed after the decoding of hexadecimal packets is completed
 	 * @param ctx
 	 * @param msg
 	 * @throws Exception
@@ -70,12 +70,12 @@ public class ServerChannelHandlerAdapter extends ChannelInboundHandlerAdapter {
 
 		System.err.println("+++++++++++++++-----------");
 		System.err.println(s.toString());
-//		将解码后的信息转成msgVo对象
+//		The decoded information is converted into msgVo object
 
 		MsgVo vo = (MsgVo) msg;
 		logger.info(vo.getData()+"|||||||");
 		try {
-//			将消息传入中间处理器中
+//			Pass the message into the intermediate processor
 			RequestDispatcher.dispatcher(ctx, vo);
 		} catch (Exception e) {
 
@@ -97,14 +97,14 @@ public class ServerChannelHandlerAdapter extends ChannelInboundHandlerAdapter {
 		 * cause.printStackTrace(printWriter); cause = cause.getCause(); }
 		 * printWriter.close(); String result = writer.toString();
 		 * logger.error("exceptionCaught:"+getIPString(ctx)+",cause:"+result); //
-		 * logger.info("当前已使用的堆外内存:"+DirectMemoryUtill.getDirectMemorySize()+"Kb");
+		 * logger.info("Out-of-heap memory that is currently used:"+DirectMemoryUtill.getDirectMemorySize()+"Kb");
 		 * }catch(Exception e){ } if(cause instanceof ReadTimeoutException){
-		 * logger.info("读取超时Exceptione"); }
+		 * logger.info("Read timeoutExceptione"); }
 		 */
 //		SocketChannel channel = (SocketChannel) ctx.channel();
 //		String deviceId = NettyChannelMap.get(channel);
 //		ctx.close();
-//		logger.error("通道异常 [deviceId={},ip={}]", deviceId, getIPString(ctx), cause);
+//		logger.error("Channel exception [deviceId={},ip={}]", deviceId, getIPString(ctx), cause);
 	}
 
 	@Override
@@ -112,7 +112,7 @@ public class ServerChannelHandlerAdapter extends ChannelInboundHandlerAdapter {
 		if (evt instanceof IdleStateEvent) {
 			IdleStateEvent event = (IdleStateEvent) evt;
 			if (event.state() == IdleState.READER_IDLE) {
-				// logger.info("TCP IdleStateEvent,超过5分钟未读取到终端数据，关闭链接");
+				// logger.info("TCP IdleStateEvent,Close the link if no terminal data has been read for more than 5 minutes");
 				ctx.channel().close();
 				logger.warn(NettyChannelMap.get((SocketChannel) ctx.channel()) + " 超过3分钟未心跳");
 			}

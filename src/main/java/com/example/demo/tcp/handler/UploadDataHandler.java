@@ -28,19 +28,19 @@ public class UploadDataHandler<T> implements BaseHandler {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     /**
-     * 数据上报的处理过程
+     * Data reporting process
      * @param msgVo
      * @param ctx
      * @return
      */
     @Override
     public MsgVo handle(MsgVo msgVo, ChannelHandlerContext ctx) {
-//        将数据中的xml格式数据解析为json格式
+//        Parse the xml format data in the data into json format
         JSONObject jsonObject = XmlTool.documentToJSONObject(msgVo.getData());
 
-        logger.info("客流数据上报：" + jsonObject);
+        logger.info("Passenger flow data reporting：" + jsonObject);
 
-//        获取设备唯一值
+//        Retrieves a device unique value
         String uuid = jsonObject.getString("uuid");
 
 
@@ -51,14 +51,14 @@ public class UploadDataHandler<T> implements BaseHandler {
 
         MsgVo msgVo1 = response(uuid, 0, msgVo);
 
-        logger.info("客流数据回复：" + XmlTool.documentToJSONObject(msgVo1.getData()));
+        logger.info("Passenger flow data reply：" + XmlTool.documentToJSONObject(msgVo1.getData()));
 
-//        成功返回指定信息
+//        The specified information is returned successfully
         return msgVo1;
     }
 
     /**
-     * 将返回数据进行格式化处理
+     * Format the returned data
      * @param deviceId
      * @param ret
      * @param msgVo

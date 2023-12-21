@@ -14,7 +14,7 @@ import java.time.format.DateTimeFormatter;
 
 /**
  * @author TRH
- * @description: 数据上报
+ * @description: Data reporting
  * @Package com.example.testdemo.tcpkeliu1.handler
  * @date 2023/3/23 17:45
  */
@@ -33,7 +33,7 @@ public class DataHandler implements BaseHandler5g {
         String[] split = data.split(",");
         String sn = split[0];
 
-//        当前服务器时间
+//        Current server time
         LocalDateTime now = LocalDateTime.now();
         String time = DateTimeFormatter.ofPattern("yyyyMMddHHmmss").format(now);
 
@@ -49,19 +49,19 @@ public class DataHandler implements BaseHandler5g {
         msgvo.setType(msgVo5g.getType());
         msgvo.setParams(msgVo5g.getType());
         StringBuilder data = new StringBuilder();
-//        状态码
+//        Status code
         data.append(code);
         data.append(",");
-//        时间
+//        Time
         data.append(time);
         data.append(",");
-//        是否升级
+//        Upgrade or not
         data.append(update);
         data.append(",");
-//        更新的路径
+//        Updated path
         data.append(updateUrl);
         data.append(",");
-//      url链接包头长度
+//      url Link header size
         data.append(length);
 
         String s = data.toString();

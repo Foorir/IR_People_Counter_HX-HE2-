@@ -2,9 +2,9 @@ package com.example.demo.tcp.constant;
 
 public enum CmdType {
 
-	DATA_UPLOAD((byte) 0x21, "数据上报"),
-	TIME_SYNC((byte) 0x22, "时间同步"),
-	TRAVEL_TRACK_FLOW((byte) 0x23,"行程轨迹"),
+	DATA_UPLOAD((byte) 0x21, "Data reporting"),
+	TIME_SYNC((byte) 0x22, "Time synchronization"),
+	TRAVEL_TRACK_FLOW((byte) 0x23,"Path of travel"),
 	;
 
 	private byte typeCode;

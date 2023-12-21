@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 import java.net.SocketAddress;
 
 /**
- * 数据发送
+ * Data sending
  * @author allen
  */
 public class MsgServerOutHandler extends ChannelOutboundHandlerAdapter{

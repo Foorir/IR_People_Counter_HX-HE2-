@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
 
 /**
  * @author TRH
- * @description: 处理器注解
+ * @description: Processor annotations
  * @Package com.example.demo.tcp5g.annotation
  * @date 2023/3/27 16:10
  */

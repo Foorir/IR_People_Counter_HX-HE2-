@@ -41,39 +41,39 @@ public class TravelTrackFlowHandler<T> implements BaseHandler {
 //        DeviceGatewayEntity device = deviceGatewayDao.selectOne(
 //                new QueryWrapper<DeviceGatewayEntity>().lambda().eq(DeviceGatewayEntity::getDeviceSn,travelTrackFlowVO.getDeviceSn()));
 //        if (device == null) {
-//                找不到此设备,发送错误信息
-//            log.warn("平台不存在该设备：{}", travelTrackFlowVO.getDeviceSn());
+//                Cannot find this device, send error message
+//            log.warn("The device does not exist on the platform：{}", travelTrackFlowVO.getDeviceSn());
 //            return response(travelTrackFlowVO.getDeviceSn(), 2, msgVo);
 //        }
-//            为绑定出入口或者实体,发送错误信息
+//            Send an error message to bind an entry or entity
 //        if (device.getDoorId() == null || device.getEntityId() == null) {
-//            log.warn("该设备未绑定门店：{}", travelTrackFlowVO.getDeviceSn());
+//            log.warn("The device is not tied to stores：{}", travelTrackFlowVO.getDeviceSn());
 //            return response(travelTrackFlowVO.getDeviceSn(), 2, msgVo);
 //        }
 //        String timeZone = sysUserService.getById(device.getCreateUserId()).getTimeZone();
 //        if (StringUtils.isNotBlank(timeZone)) {
 //            entityFlow.setCreateTime(TimeZoneUtils.getDate(new Date(), timeZone));
 //        }
-//        将设备数据的名称与时间点放入map中
+//        Put the name and time point of the device data into the map
 //        Map<String, Object> params = new HashMap<>();
 //        params.put("name", entityFlow.getDeviceSn());
 //        params.put("timepoint", DateUtils.formatDateTime(entityFlow.getTimepoint()));
-//            通过此数据进行查询有无重复数据,entityFlowService可以替换为各自网关设备人流数据记录表所对应的服务接口
+//            This data is used to query for duplicate data,entityFlowServiceCan be replaced with the corresponding service interface of the respective gateway device flow data record table
 //        List<EntityFlowEntity> entityFlowEntities = entityFlowService.queryAll(params);
 //        if (entityFlowEntities.size() > 0) {
-//                若已存在数据,则发送错误信息
-//            log.warn("上传失败,记录已存在：deviceSn={},time={}", travelTrackFlowVO.getDeviceSn(), entityFlow.getTimepoint());
+//                If the data already exists, an error message is sent
+//            log.warn("Upload failed, record already exists：deviceSn={},time={}", travelTrackFlowVO.getDeviceSn(), entityFlow.getTimepoint());
 //            return response(travelTrackFlowVO.getDeviceSn(), 0, msgVo);
 //        }
-//        设置设备对应的实体id和门id
+//        Set the corresponding entity id and door id of the device
 //        entityFlow.setEntityId(Long.valueOf(device.getEntityId()));
 //        entityFlow.setDoorId(device.getDoorId());
-//            在人流数据表中保存此数据,entityFlowService可以替换为各自网关设备人流数据记录表所对应的服务接口
+//            Save this data in the flow data table,entityFlowServiceCan be replaced with the corresponding service interface of the respective gateway device flow data record table
 //        boolean b = entityFlowService.save(entityFlow);
 //        if(b){
 //            return response(travelTrackFlowVO.getDeviceSn(),0,msgVo);
 //        }
-//        log.warn("上传失败,参数为:{}",entityFlow.toString());
+//        log.warn("Upload failed with the parameter:{}",entityFlow.toString());
 //        return response(travelTrackFlowVO.getDeviceSn(), 1, msgVo);
 
         return response("123",1,msgVo);
@@ -81,7 +81,7 @@ public class TravelTrackFlowHandler<T> implements BaseHandler {
 
 
     /**
-     * 将返回数据进行格式化处理
+     * Format the returned data
      * @param deviceId
      * @param ret
      * @param msgVo

@@ -14,7 +14,7 @@ import java.util.Date;
 
 /**
  * @author TRH
- * @description: 历史数据
+ * @description: Historical data
  * @Package com.example.demo.tcp5g.handler
  * @date 2023/4/6 15:12
  */
@@ -28,11 +28,11 @@ public class HistoryDataHandler implements BaseHandler5g{
     public MsgVo5g handle(MsgVo5g msgVo, ChannelHandlerContext ctx) {
 
         String data = msgVo.getData();
-        log.info("接收到历史数据上报：{}", data);
+        log.info("Received historical data report：{}", data);
         String[] split = data.split(",");
 //sn
         String sn = split[0];
-//        当前服务器时间
+//        Current server time
         LocalDateTime now = LocalDateTime.now();
         String time = DateTimeFormatter.ofPattern("yyyyMMddHHmmss").format(now);
 
@@ -48,16 +48,16 @@ public class HistoryDataHandler implements BaseHandler5g{
         msgvo.setType(msgVo5g.getType());
         msgvo.setParams(msgVo5g.getType());
         StringBuilder data = new StringBuilder();
-//        状态码
+//        Status code
         data.append(code);
         data.append(",");
-//        时间
+//        Time
         data.append(time);
         data.append(",");
-//        是否升级
+//        Upgrade or not
         data.append(update);
         data.append(",");
-//        更新的路径
+//        Updated path
         data.append(updateUrl);
 
         String s = data.toString();

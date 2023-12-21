@@ -44,14 +44,14 @@ public class NettyTcpServer5g2 implements Runnable {
 
 
     /**
-     * 通道适配器
+     * Channel adapter
      */
     @Resource
     private ServerChannelHandlerAdapter5g channelHandlerAdapter;
 
     public synchronized void startListen() {
         try {
-            // 绑定到指定端口
+            // Bind to the specified port
             channelFuture = server.bind(port).sync();
             log.info("server listen on port [{}] success !", port);
         } catch (Exception e) {
@@ -62,9 +62,9 @@ public class NettyTcpServer5g2 implements Runnable {
 
     @Override
     public void run() {
-        // nio连接处理池
+        // The nio connects to the processor pool
         this.bossGroup = new NioEventLoopGroup();
-        // 处理事件池
+        // Handling event pools
         this.workerGroup = new NioEventLoopGroup();
         server = new ServerBootstrap();
         server.group(bossGroup, workerGroup)
@@ -72,7 +72,7 @@ public class NettyTcpServer5g2 implements Runnable {
                 .childHandler(new ChannelInitializer<SocketChannel>() {
                     @Override
                     protected void initChannel(SocketChannel ch) throws Exception {
-                        // 自定义处理类
+                        // Custom processing classes
                         ch.pipeline().addLast("frameDecoder", new LengthFieldBasedFrameDecoder(905969674,7,2,3,0));
                         ch.pipeline().addLast(new NettyDecoder5g());
 //                        ch.pipeline().addLast(new TcpServerHandler1());

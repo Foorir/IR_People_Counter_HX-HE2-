@@ -16,7 +16,7 @@ import java.util.TimeZone;
 
 /**
  * @author TRH
- * @description: 固件升级
+ * @description: Firmware upgrade
  * @Package com.example.testdemo.tcpkeliu1.handler
  * @date 2023/3/27 15:46
  */
@@ -29,7 +29,7 @@ public class LevelUpHandler implements BaseHandler5g {
     @Override
     public MsgVo5g handle(MsgVo5g msgVo, ChannelHandlerContext ctx) {
 
-        log.info("接收到固件升级应用数据：{}", msgVo.getData());
+        log.info("Received firmware upgrade application data：{}", msgVo.getData());
         String data = msgVo.getData();
         String[] split = data.split(",");
 
@@ -47,16 +47,16 @@ public class LevelUpHandler implements BaseHandler5g {
         msgvo.setType(msgVo5g.getType());
         msgvo.setParams(msgVo5g.getType());
         StringBuilder data = new StringBuilder();
-//        状态码
+//        Status code
         data.append(code);
         data.append(",");
-//        时间
+//        Time
         data.append(time);
         data.append(",");
-//        是否升级
+//        Upgrade or not
         data.append(update);
         data.append(",");
-//        更新的路径
+//        Updated path
         data.append(updateUrl);
 
         String s = data.toString();

@@ -24,7 +24,7 @@ public class ContextRefreshedListener5g implements ApplicationListener<Applicati
     @Override
     public void onApplicationEvent(ApplicationStartedEvent event) {
         HashMap<Byte, BaseHandler5g> map = new HashMap<>();
-//        获取所有实例业务场景
+//        Get all instance business scenarios
         Map<String, Object> handlerMap = event.getApplicationContext().getBeansWithAnnotation(RequestHandler5g.class);
         //log.info("---------------------load request handler----------------------");
 
@@ -34,7 +34,7 @@ public class ContextRefreshedListener5g implements ApplicationListener<Applicati
             Annotation[] annotations = c.getDeclaredAnnotations();
             for (Annotation annotation : annotations) {
                 if (annotation.annotationType().equals(RequestHandler5g.class)){
-//                    将相应的类型和业务放入到map中
+//                    Put the appropriate type and business into the map
                     RequestHandler5g requestHandler = (RequestHandler5g) annotation;
                     map.put(requestHandler.type().getTypeCode(), object);
                     //log.info("{}：{}", requestHandler.type().getDescs(),object.getClass().getName());

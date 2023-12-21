@@ -19,7 +19,7 @@ import java.nio.charset.StandardCharsets;
 public class NettyEncoder5g extends MessageToByteEncoder<MsgVo5g> {
     @Override
     protected void encode(ChannelHandlerContext ctx, MsgVo5g msg, ByteBuf out) throws Exception {
-//写入头字节
+//Write header byte
         out.writeByte(msg.getHead());
         out.writeBytes(msg.getSn());
         out.writeByte(msg.getType());
@@ -43,7 +43,7 @@ public class NettyEncoder5g extends MessageToByteEncoder<MsgVo5g> {
                     break;
             }
         }
-//      写入转义后的数据
+//      Write the escaped data
         out.writeBytes(buf);
 
 
@@ -64,7 +64,7 @@ public class NettyEncoder5g extends MessageToByteEncoder<MsgVo5g> {
         out.writeByte(bytesCrc[0]);
         out.writeByte(bytesCrc[1]);
         out.writeByte(msg.getTail());
-//        释放
+//        release
         buf.release();
         crcDemo.release();
         ctx.flush();

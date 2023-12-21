@@ -32,13 +32,13 @@ public class NettyServer implements Runnable {
 	
     ServerBootstrap serverBootstrap = new ServerBootstrap();
     
-	// 用于服务器端接受客户端的连接
+	// Used on the server side to accept connections from clients
 	EventLoopGroup bossGroup = new NioEventLoopGroup();
-	// 用于网络事件的处理
+	// Used for network event processing
 	EventLoopGroup workerGroup = new NioEventLoopGroup();
 	
 	/**
-	 * 通道适配器
+	 * Channel adapter
 	 */
 	@Resource
     private ServerChannelHandlerAdapter channelHandlerAdapter;
@@ -81,14 +81,14 @@ public class NettyServer implements Runnable {
 	}
 	
 	 /**
-     * 关闭服务器方法
+     * Shutdown server method
      */
     @PreDestroy
     public void close() {
     	  logger.info("-----------------------------------------------");
           logger.info("------TCP/IP Server start on port "+port+" close!");
           logger.info("-----------------------------------------------");
-        //优雅退出
+        //Exit gracefully
     	bossGroup.shutdownGracefully();
     	workerGroup.shutdownGracefully();
     }
