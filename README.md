@@ -5,7 +5,7 @@
 - The protocol is currently only for infrared people counter Digital version series products. Other products will support this protocol in the future. Please pay attention to this in time for subsequent update records.
 - When designing this protocol, low power consumption, low computing power and other devices were also taken into consideration, so the protocol is directly based on TCP and uses hexadecimal + ANSII code for transmission.
 - The protocol takes into account special situations such as sticky packets and escaping.
-
+- Applicable model: HX-HE2(WD5)
 ##2. Detailed explanation of the protocol
 
 ### 2.1 Protocol structure
