@@ -1,8 +1,8 @@
-# Infrared People Counter HE2 series product communication protocol
+# Infrared passenger flow series product communication protocol
 
 ## 1. Brief description of the protocol
 
-- The protocol is currently only for infrared people counter HE-2 series products. Other products will support this protocol in the future. Please pay attention to this in time for subsequent update records.
+- The protocol is currently only for infrared people counter Digital version series products. Other products will support this protocol in the future. Please pay attention to this in time for subsequent update records.
 - When designing this protocol, low power consumption, low computing power and other devices were also taken into consideration, so the protocol is directly based on TCP and uses hexadecimal + ANSII code for transmission.
 - The protocol takes into account special situations such as sticky packets and escaping.
 
