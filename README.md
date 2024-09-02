@@ -135,11 +135,11 @@ The purpose of the escape character is to prevent the sender from appearing in n
 
 0x7D: Change to 0x7C 0x5D and send
 
-0x7E: Change to 0x7C 0x5D and send
+0x7E: Change to 0x7C 0x5E and send
 
 It is worth noting here what to do if 7C itself appears. same:
 
-70xC: Change to 0x7C 0x5C and send
+0x7C: Change to 0x7C 0x5C and send
 
 The specific implementation code is as follows:
 
